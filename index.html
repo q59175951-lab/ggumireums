@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>꿈이룸연구소 — 학교 캠프 전문 교육기관</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#1A2E4A;--navy-dark:#0F1E30;--navy-mid:#2A4264;
+  --blue:#4A7BB5;--blue-light:#6B9FD4;--blue-pale:#EBF3FB;
+  --white:#FFFFFF;--bg:#F7F9FC;--bg-mid:#EEF3F9;
+  --text:#1A2E4A;--text-mid:#445D78;--muted:#7A93A8;
+  --border:#DDE6EF;
+  --font:"Apple SD Gothic Neo","Malgun Gothic","Nanum Gothic",sans-serif;
+  --radius:8px;
+  --shadow:0 2px 20px rgba(26,46,74,.06);
+  --shadow-lg:0 12px 40px rgba(26,46,74,.12);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--text);background:var(--white);line-height:1.7;font-size:15px}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--font);cursor:pointer;border:none}
+.container{max-width:1100px;margin:0 auto;padding:0 40px}
+.section{padding:88px 0}
+.section-sm{padding:56px 0}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.section-title{font-size:32px;font-weight:700;line-height:1.35;color:var(--navy);margin-bottom:16px}
+.section-sub{font-size:16px;color:var(--muted);line-height:1.75}
+ 
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1100px;margin:0 auto;padding:0 40px}
+.nav-logo{font-size:16px;font-weight:700;color:var(--navy);letter-spacing:-.01em;cursor:pointer;white-space:nowrap}
+.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-link{font-size:14px;color:var(--muted);padding:6px 12px;border-radius:4px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-link:hover{color:var(--navy)}
+.nav-link.active{color:var(--navy);font-weight:500}
+.nav-cta{background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:8px 18px;border-radius:4px;cursor:pointer;transition:all .2s;white-space:nowrap;margin-left:12px}
+.nav-cta:hover{background:var(--navy-mid)}
+ 
+/* PAGE SYSTEM */
+.page{display:none}
+.page.active{display:block}
+ 
+/* PAGE HERO — light version */
+.page-hero{background:var(--bg);border-bottom:1px solid var(--border);padding:120px 0 56px}
+.page-hero .section-label{color:var(--blue)}
+.page-hero h1{font-size:36px;font-weight:700;color:var(--navy);margin-bottom:10px}
+.page-hero p{font-size:16px;color:var(--muted)}
+ 
+/* BUTTONS */
+.btn-primary{background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:13px 28px;border-radius:var(--radius);transition:all .2s;display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:var(--font)}
+.btn-primary:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,46,74,.2)}
+.btn-outline-white{background:#fff;border:1.5px solid var(--border);color:var(--navy);font-size:14px;font-weight:500;padding:13px 28px;border-radius:var(--radius);transition:all .2s;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:var(--font)}
+.btn-outline-white:hover{border-color:var(--navy);background:var(--bg)}
+.btn-navy{background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:12px 24px;border-radius:var(--radius);transition:all .2s;cursor:pointer;font-family:var(--font);border:none}
+.btn-navy:hover{background:var(--navy-mid);box-shadow:0 4px 16px rgba(26,46,74,.2)}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-mid);font-size:13px;font-weight:500;padding:8px 18px;border-radius:4px;cursor:pointer;font-family:var(--font);transition:all .2s}
+.btn-ghost:hover{border-color:var(--navy);color:var(--navy)}
+ 
+/* ===================== HOME ===================== */
+/* HERO — clean white with subtle bg texture like reference image */
+.hero{background:var(--white);padding:140px 0 96px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 70% 50%,rgba(74,123,181,.06) 0%,transparent 60%),
+  radial-gradient(circle at 20% 80%,rgba(74,123,181,.04) 0%,transparent 50%);
+}
+.hero-inner{position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue-pale);border:1px solid rgba(74,123,181,.2);color:var(--blue);font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;margin-bottom:28px;letter-spacing:.04em}
+.hero h1{font-size:46px;font-weight:700;color:var(--navy);line-height:1.25;letter-spacing:-.03em;margin-bottom:22px;max-width:600px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,#3B6CB5,#6B9FD4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:16px;color:var(--muted);max-width:520px;line-height:1.9;margin-bottom:40px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:72px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg)}
+.hero-stat{padding:28px 20px;text-align:center;border-right:1px solid var(--border)}
+.hero-stat:last-child{border-right:none}
+.hero-stat-num{font-size:32px;font-weight:700;color:var(--navy);letter-spacing:-.03em;line-height:1;margin-bottom:6px}
+.hero-stat-num span{font-size:17px;color:var(--blue);font-weight:600}
+.hero-stat-label{font-size:12px;color:var(--muted);letter-spacing:.01em}
+ 
+/* PROGRAMS GRID */
+.prog-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+.prog-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:24px 20px;transition:all .25s;cursor:pointer;position:relative;overflow:hidden}
+.prog-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue-light));transform:scaleX(0);transition:transform .25s;transform-origin:left}
+.prog-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:rgba(74,123,181,.2)}
+.prog-card:hover::after{transform:scaleX(1)}
+.prog-icon{width:44px;height:44px;border-radius:10px;background:var(--blue-pale);margin-bottom:16px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.prog-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:7px}
+.prog-desc{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:12px}
+.prog-tags{display:flex;flex-wrap:wrap;gap:4px}
+.prog-tag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--bg);color:var(--text-mid);border:1px solid var(--border)}
+.prog-card-cta{background:var(--navy);border-color:var(--navy);display:flex;flex-direction:column;justify-content:center;text-align:center}
+ 
+/* WHY SECTION — light gray bg, white cards */
+.why-section{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.why-card{padding:36px 28px;border-radius:12px;border:1px solid var(--border);background:var(--white);transition:all .25s}
+.why-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.why-num{font-size:13px;font-weight:700;color:var(--blue);letter-spacing:.1em;margin-bottom:16px}
+.why-title{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.why-desc{font-size:14px;color:var(--muted);line-height:1.85}
+ 
+/* CASES PREVIEW */
+.cases-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+.case-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all .25s}
+.case-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.case-img{height:150px;background:var(--bg-mid);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted)}
+.case-body{padding:18px}
+.case-tag{display:inline-block;font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-pale);padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.case-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px}
+.case-info{font-size:12px;color:var(--muted)}
+ 
+/* CTA SECTION — dark navy for contrast */
+.cta-section{background:var(--navy);text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 30% 50%,rgba(74,123,181,.15) 0%,transparent 60%),
+  radial-gradient(circle at 80% 30%,rgba(107,159,212,.1) 0%,transparent 50%);
+}
+.cta-inner{position:relative;z-index:1}
+.cta-section h2{font-size:30px;font-weight:700;color:var(--white);margin-bottom:12px}
+.cta-section p{font-size:15px;color:rgba(255,255,255,.65);margin-bottom:36px;line-height:1.8}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+ 
+/* CONTACT QUICK */
+.contact-quick{background:var(--white);border-top:1px solid var(--border)}
+.contact-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.contact-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:26px 22px;display:flex;align-items:flex-start;gap:14px;transition:all .2s}
+.contact-item:hover{border-color:rgba(74,123,181,.3);background:var(--blue-pale)}
+.contact-icon-box{width:42px;height:42px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.contact-label{font-size:12px;color:var(--muted);margin-bottom:3px}
+.contact-value{font-size:15px;font-weight:700;color:var(--navy)}
+.contact-note{font-size:12px;color:var(--muted);margin-top:2px}
+ 
+/* FOOTER */
+footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,.06);padding:40px 0 24px}
+.footer-inner{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;gap:24px;flex-wrap:wrap}
+.footer-logo{font-size:16px;font-weight:700;color:var(--white);margin-bottom:10px}
+.footer-logo span{color:var(--blue-light)}
+.footer-info{font-size:12px;color:rgba(255,255,255,.35);line-height:1.9}
+.footer-links{display:flex;gap:14px;flex-wrap:wrap}
+.footer-link{font-size:13px;color:rgba(255,255,255,.45);cursor:pointer;transition:color .2s}
+.footer-link:hover{color:rgba(255,255,255,.85)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:18px;font-size:12px;color:rgba(255,255,255,.25)}
+ 
+/* ===================== ABOUT ===================== */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.about-img-ph{height:380px;background:var(--bg-mid);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;border:1px solid var(--border)}
+.about-text h2{font-size:26px;font-weight:700;color:var(--navy);margin-bottom:20px;line-height:1.45}
+.about-text p{font-size:15px;color:var(--text-mid);line-height:1.9;margin-bottom:14px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.value-card{text-align:center;padding:32px 18px;background:var(--white);border:1px solid var(--border);border-radius:10px;transition:all .25s}
+.value-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.value-icon{font-size:26px;margin-bottom:12px}
+.value-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.value-desc{font-size:13px;color:var(--muted);line-height:1.7}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px}
+.team-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;text-align:center;transition:all .25s}
+.team-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.team-photo{height:110px;background:var(--bg-mid);display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--muted)}
+.team-info{padding:14px 10px}
+.team-name{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.team-role{font-size:12px;color:var(--muted)}
+ 
+/* ===================== PROGRAMS ===================== */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid var(--border);margin-bottom:36px}
+.filter-btn{font-size:13px;font-weight:500;padding:7px 16px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;transition:all .2s;font-family:var(--font)}
+.filter-btn:hover,.filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.prog-list{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.prog-detail-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
+.prog-detail-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.pdc-header{background:var(--navy);padding:22px}
+.pdc-icon{font-size:26px;margin-bottom:10px}
+.pdc-title{font-size:16px;font-weight:700;color:var(--white);margin-bottom:4px}
+.pdc-target{font-size:12px;color:rgba(255,255,255,.6)}
+.pdc-body{padding:18px 22px;flex:1}
+.pdc-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:14px}
+.pdc-tags{display:flex;flex-wrap:wrap;gap:4px}
+.pdc-tag{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--bg);color:var(--text-mid);border:1px solid var(--border)}
+.pdc-footer{display:flex;justify-content:space-between;align-items:center;padding:12px 22px;border-top:1px solid var(--border);background:var(--bg)}
+.pdc-duration{font-size:12px;color:var(--muted)}
+.pdc-btn{font-size:12px;font-weight:600;color:var(--navy);padding:6px 14px;border-radius:4px;border:1px solid var(--navy);background:transparent;cursor:pointer;transition:all .2s;font-family:var(--font)}
+.pdc-btn:hover{background:var(--navy);color:var(--white)}
+.prog-custom-cta{text-align:center;margin-top:48px;padding:48px;background:var(--bg);border-radius:12px;border:1px solid var(--border)}
+ 
+/* ===================== CASES ===================== */
+.cases-list{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:48px}
+.case-full-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;transition:all .25s}
+.case-full-card:hover{box-shadow:var(--shadow-lg)}
+.case-accent{width:5px;background:var(--navy);flex-shrink:0}
+.case-content{padding:22px;flex:1}
+.case-school-label{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--gold);margin-bottom:8px}
+.case-full-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px}
+.case-meta-row{display:flex;gap:16px;margin-bottom:12px}
+.case-meta-item{font-size:12px;color:var(--muted)}
+.case-quote{font-size:13px;color:var(--text-mid);line-height:1.75;padding:12px 14px;background:var(--bg);border-radius:6px;border-left:3px solid var(--navy)}
+ 
+/* ===================== RESOURCES ===================== */
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+.res-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:28px 24px;transition:all .25s;cursor:pointer}
+.res-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:rgba(74,123,181,.3)}
+.res-type{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--blue);margin-bottom:12px}
+.res-icon{font-size:30px;margin-bottom:14px}
+.res-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.res-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.res-action{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--navy)}
+ 
+/* ===================== CONTACT ===================== */
+.contact-page-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:48px}
+.contact-info-list{display:flex;flex-direction:column;gap:16px}
+.info-card{background:var(--bg);border-radius:var(--radius);padding:22px;border:1px solid var(--border)}
+.info-card-label{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.05em}
+.info-card-value{font-size:17px;font-weight:700;color:var(--navy)}
+.info-card-note{font-size:12px;color:var(--muted);margin-top:4px}
+.form-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:32px}
+.form-wrap h3{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:24px}
+.form-group{margin-bottom:14px}
+.form-label{font-size:13px;font-weight:600;color:var(--text-mid);margin-bottom:5px;display:block}
+.form-input,.form-select,.form-textarea{width:100%;padding:10px 13px;font-size:14px;font-family:var(--font);border:1px solid var(--border);border-radius:var(--radius);background:var(--white);color:var(--text);outline:none;transition:border-color .2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--navy)}
+.form-textarea{resize:vertical;min-height:110px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.submit-btn{width:100%;padding:14px;background:var(--navy);color:var(--white);font-size:15px;font-weight:700;border:none;border-radius:var(--radius);cursor:pointer;transition:all .2s;font-family:var(--font);margin-top:6px}
+.submit-btn:hover{background:var(--navy-mid);box-shadow:0 6px 20px rgba(26,46,74,.2)}
+ 
+/* DIVIDER */
+.sec-divider{height:1px;background:var(--border);margin:56px 0}
+</style>
+</head>
+<body>
+ 
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="go('home')">꿈이룸<span>연구소</span></div>
+    <div class="nav-links">
+      <span class="nav-link" onclick="go('home')">홈</span>
+      <span class="nav-link" onclick="go('about')">연구소 소개</span>
+      <span class="nav-link" onclick="go('programs')">캠프 프로그램</span>
+      <span class="nav-link" onclick="go('cases')">운영 사례</span>
+      <span class="nav-link" onclick="go('resources')">자료실</span>
+      <span class="nav-link" onclick="go('contact')">문의하기</span>
+      <button class="nav-cta" onclick="go('contact')">제안서 요청</button>
+    </div>
+  </div>
+</nav>
+ 
+<!-- ===================================================
+     HOME PAGE
+==================================================== -->
+<div id="page-home" class="page active">
+ 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-badge">🏫 학교 캠프 전문 교육기관</div>
+      <h1>학교 현장이 <em>신뢰하는</em><br>캠프 교육 전문기관</h1>
+      <p class="hero-desc">진로·AI·자기주도학습·입시·환경·인성·팀빌딩 — 학교 교육과정에 최적화된 맞춤 캠프를 설계하고 운영합니다. 담당 교사의 결재 준비부터 현장 운영까지 모두 지원합니다.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="go('resources')">📄 제안서 다운로드</button>
+        <button class="btn-outline-white" onclick="go('programs')">프로그램 살펴보기 →</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">00<span>개교</span></div>
+          <div class="hero-stat-label">협력 운영 학교</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">00<span>회</span></div>
+          <div class="hero-stat-label">캠프 운영 횟수</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">00<span>명</span></div>
+          <div class="hero-stat-label">누적 참가 학생</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">7<span>개</span></div>
+          <div class="hero-stat-label">캠프 프로그램</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- PROGRAMS OVERVIEW -->
+  <section class="section" style="background:var(--bg)">
+    <div class="container">
+      <div class="section-label">CAMP PROGRAMS</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+        <div>
+          <h2 class="section-title">학교 맞춤형 캠프 프로그램</h2>
+          <p class="section-sub">학교급·교육 목표에 따라 커리큘럼을 맞춤 설계합니다</p>
+        </div>
+        <button class="btn-ghost" onclick="go('programs')">전체 보기 →</button>
+      </div>
+      <div class="prog-grid">
+        <div class="prog-card" onclick="go('programs')">
+          <div class="prog-icon">🧭</div>
+          <div class="prog-title">진로탐색캠프</div>
+          <div class="prog-desc">자기이해·직업세계 탐색·미래설계를 체험 중심으로</div>
+          <div class="prog-tags"><span class="prog-tag">초·중·고</span><span class="prog-tag">창체연계</span></div>
+        </div>
+        <div class="prog-card" onclick="go('programs')">
+          <div class="prog-icon">🤖</div>
+          <div class="prog-title">AI·미래역량캠프</div>
+          <div class="prog-desc">AI 리터러시, 데이터 사고, 미래 기술 체험 프로그램</div>
+          <div class="prog-tags"><span class="prog-tag">중·고</span><span class="prog-tag">SW교육연계</span></div>
+        </div>
+        <div class="prog-card" onclick="go('programs')">
+          <div class="prog-icon">📚</div>
+          <div class="prog-title">자기주도학습캠프</div>
+          <div class="prog-desc">학습 전략 수립, 시간 관리, 메타인지 훈련</div>
+          <div class="prog-tags"><span class="prog-tag">중·고</span><span class="prog-tag">1~3일 과정</span></div>
+        </div>
+        <div class="prog-card" onclick="go('programs')">
+          <div class="prog-icon">🎓</div>
+          <div class="prog-title">입시전략캠프</div>
+          <div class="prog-desc">고교학점제·탐구보고서·대입 전략 집중 설계</div>
+          <div class="prog-tags"><span class="prog-tag">고등</span><span class="prog-tag">전용 프로그램</span></div>
+        </div>
+        <div class="prog-card" onclick="go('programs')">
+          <div class="prog-icon">🌿</div>
+          <div class="prog-title">환경캠프</div>
+          <div class="prog-desc">기후변화·생태 감수성·환경 행동 실천 프로젝트</div>
+          <div class="prog-tags"><span class="prog-tag">초·중·고</span><span class="prog-tag">환경교육연계</span></div>
+        </div>
+        <div class="prog-card" onclick="go('programs')">
+          <div class="prog-icon">🤝</div>
+          <div class="prog-title">인성캠프</div>
+          <div class="prog-desc">공동체 의식, 관계 역량, 올바른 가치관 형성</div>
+          <div class="prog-tags"><span class="prog-tag">초·중·고</span><span class="prog-tag">학교폭력예방연계</span></div>
+        </div>
+        <div class="prog-card" onclick="go('programs')">
+          <div class="prog-icon">🏆</div>
+          <div class="prog-title">팀빌딩캠프</div>
+          <div class="prog-desc">협업·리더십·갈등 해결 역량을 키우는 액션러닝</div>
+          <div class="prog-tags"><span class="prog-tag">중·고</span><span class="prog-tag">1박2일 추천</span></div>
+        </div>
+        <div class="prog-card prog-card-cta" onclick="go('contact')">
+          <div style="font-size:26px;margin-bottom:12px">✉️</div>
+          <div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:8px">맞춤 설계 문의</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.65">학교 요구에 맞춰<br>새로 기획해드립니다</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- WHY US -->
+  <section class="section why-section">
+    <div class="container">
+      <div class="section-label">WHY 꿈이룸연구소</div>
+      <h2 class="section-title">선생님이 믿고 맡길 수 있는 이유</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-num">01</div>
+          <div class="why-title">교육과정 연계 설계</div>
+          <div class="why-desc">창의적 체험활동, 자유학기제, 고교학점제 등 학교 교육과정에 맞춰 목표와 커리큘럼을 함께 설계합니다. 단순 행사가 아닌 교육적 성과가 있는 캠프를 만듭니다.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-num">02</div>
+          <div class="why-title">결재 지원 원스톱 제공</div>
+          <div class="why-desc">제안서, 커리큘럼 자료, 강사 이력서, 안전관리 계획서, 견적서까지 담당 교사의 결재에 필요한 모든 자료를 즉시 제공합니다.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-num">03</div>
+          <div class="why-title">검증된 전문 강사진</div>
+          <div class="why-desc">교육학·심리학·진로상담 전공 전문 강사진이 직접 운영합니다. 공개된 강사 이력과 자격으로 투명하게 확인하실 수 있습니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- CASES PREVIEW -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">CASES</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+        <div>
+          <h2 class="section-title">운영 사례</h2>
+          <p class="section-sub">실제 학교 현장에서 운영한 캠프 사례입니다</p>
+        </div>
+        <button class="btn-ghost" onclick="go('cases')">전체 사례 →</button>
+      </div>
+      <div class="cases-preview">
+        <div class="case-card">
+          <div class="case-img">📷 캠프 활동 사진</div>
+          <div class="case-body">
+            <span class="case-tag">진로탐색캠프</span>
+            <div class="case-name">○○중학교 2학년 진로탐색캠프</div>
+            <div class="case-info">참가 인원 00명 · 1박 2일</div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-img">📷 캠프 활동 사진</div>
+          <div class="case-body">
+            <span class="case-tag">자기주도학습캠프</span>
+            <div class="case-name">○○고등학교 1학년 학습전략캠프</div>
+            <div class="case-info">참가 인원 00명 · 2박 3일</div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-img">📷 캠프 활동 사진</div>
+          <div class="case-body">
+            <span class="case-tag">팀빌딩캠프</span>
+            <div class="case-name">○○초등학교 6학년 리더십캠프</div>
+            <div class="case-info">참가 인원 00명 · 당일 과정</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="container cta-inner">
+      <div class="section-label" style="text-align:center">CONTACT</div>
+      <h2>지금 바로 프로그램 제안서를 받아보세요</h2>
+      <p>학교 일정과 대상에 맞춰 맞춤 커리큘럼을 제안해드립니다<br>문의 후 1영업일 내 담당자가 연락드립니다</p>
+      <div class="cta-row">
+        <button class="btn-primary" onclick="go('resources')">📄 제안서 다운로드</button>
+        <button style="background:transparent;border:1.5px solid rgba(255,255,255,.4);color:#fff;font-size:15px;padding:14px 32px;border-radius:var(--radius);cursor:pointer;transition:all .2s;font-family:var(--font);font-weight:500" onmouseover="this.style.borderColor='rgba(255,255,255,.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,.4)'" onclick="go('contact')">맞춤 상담 신청</button>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- CONTACT QUICK -->
+  <section class="section-sm contact-quick">
+    <div class="container">
+      <div class="contact-row">
+        <div class="contact-item">
+          <div class="contact-icon-box">📞</div>
+          <div>
+            <div class="contact-label">전화 문의</div>
+            <div class="contact-value">010-5917-5951</div>
+            <div class="contact-note">08:00 – 21:00</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon-box">✉️</div>
+          <div>
+            <div class="contact-label">이메일</div>
+            <div class="contact-value" style="font-size:14px">jtwoytwo@naver.com</div>
+          </div>
+        </div>
+        <a href="https://open.kakao.com/o/smVu2gri" target="_blank" rel="noopener" style="text-decoration:none">
+          <div class="contact-item" style="cursor:pointer">
+            <div class="contact-icon-box">💬</div>
+            <div>
+              <div class="contact-label">문의 오픈채팅</div>
+              <div class="contact-value" style="font-size:14px">카카오 오픈채팅 바로가기</div>
+              <div class="contact-note">↗ 클릭하여 채팅 시작</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<!-- ===================================================
+     ABOUT PAGE
+==================================================== -->
+<div id="page-about" class="page">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label">ABOUT US</div>
+      <h1>꿈이룸연구소 소개</h1>
+      <p>학교 현장과 함께 성장하는 캠프 전문 교육기관입니다</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img-ph">대표 / 기관 사진</div>
+        <div class="about-text">
+          <h2>학교 교육의 빈자리를<br>채우는 전문 캠프 기관</h2>
+          <p>꿈이룸연구소는 초·중·고등학교 학생들이 교실 밖에서 진정한 배움을 경험할 수 있도록 전문적인 캠프 프로그램을 설계·운영하는 교육기관입니다.</p>
+          <p>학교 교육과정과 긴밀하게 연계된 프로그램을 통해 학생들의 진로, 학습, 인성, 미래 역량을 종합적으로 성장시킵니다. 담당 교사의 업무 부담을 최소화하고 결재 과정을 지원하는 원스톱 서비스를 제공합니다.</p>
+          <p>모든 프로그램은 교육학·심리학·진로상담 전문가가 직접 설계하며, 검증된 강사진이 운영합니다.</p>
+          <div style="margin-top:24px;display:flex;gap:10px">
+            <button class="btn-navy" onclick="go('programs')">프로그램 보기</button>
+            <button class="btn-ghost" onclick="go('contact')">문의하기</button>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="sec-divider"></div>
+ 
+      <div class="section-label">운영 철학</div>
+      <h2 class="section-title" style="text-align:center">우리가 캠프를 만드는 방식</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🎯</div>
+          <div class="value-title">교육 목표 중심</div>
+          <div class="value-desc">재미를 넘어 교육적 성과가 있는 프로그램을 설계합니다</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔍</div>
+          <div class="value-title">현장 맞춤 설계</div>
+          <div class="value-desc">학교의 요구와 학생 특성에 맞춰 커리큘럼을 기획합니다</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🛡️</div>
+          <div class="value-title">안전한 운영</div>
+          <div class="value-desc">철저한 안전 관리와 위기 대응 체계로 신뢰할 수 있는 운영을 보장합니다</div>
+        </div>
+      </div>
+ 
+      <div class="sec-divider"></div>
+ 
+      <div class="section-label">TEAM</div>
+      <h2 class="section-title">전문 강사진</h2>
+      <p class="section-sub" style="margin-bottom:0">교육학·심리학·진로상담 전공의 전문가들이 함께합니다</p>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo">👤</div>
+          <div class="team-info">
+            <div class="team-name">대표자명</div>
+            <div class="team-role">대표 / 교육학 박사</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">👤</div>
+          <div class="team-info">
+            <div class="team-name">강사명</div>
+            <div class="team-role">진로상담사 1급</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">👤</div>
+          <div class="team-info">
+            <div class="team-name">강사명</div>
+            <div class="team-role">청소년 심리상담사</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo">👤</div>
+          <div class="team-info">
+            <div class="team-name">강사명</div>
+            <div class="team-role">AI·SW교육 전문가</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<!-- ===================================================
+     PROGRAMS PAGE
+==================================================== -->
+<div id="page-programs" class="page">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label">PROGRAMS</div>
+      <h1>캠프 프로그램</h1>
+      <p>학교급과 교육 목표에 맞춰 최적의 프로그램을 선택하세요</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterProg(this,'all')">전체</button>
+        <button class="filter-btn" onclick="filterProg(this,'초등')">초등</button>
+        <button class="filter-btn" onclick="filterProg(this,'중등')">중등</button>
+        <button class="filter-btn" onclick="filterProg(this,'고등')">고등</button>
+      </div>
+      <div class="prog-list">
+        <div class="prog-detail-card" data-target="초등,중등,고등">
+          <div class="pdc-header"><div class="pdc-icon">🧭</div><div class="pdc-title">진로탐색캠프</div><div class="pdc-target">초등 · 중등 · 고등</div></div>
+          <div class="pdc-body"><div class="pdc-desc">자기이해, 직업세계 탐색, 미래 설계 역량을 체험 중심으로 기릅니다. 창의적 체험활동 및 자유학기제와 연계 운영 가능합니다.</div><div class="pdc-tags"><span class="pdc-tag">창체연계</span><span class="pdc-tag">자유학기제</span><span class="pdc-tag">맞춤설계</span></div></div>
+          <div class="pdc-footer"><span class="pdc-duration">⏱ 당일 / 1박 2일</span><button class="pdc-btn" onclick="go('contact')">문의하기</button></div>
+        </div>
+        <div class="prog-detail-card" data-target="중등,고등">
+          <div class="pdc-header" style="background:#6B9DC8"><div class="pdc-icon">🤖</div><div class="pdc-title">AI·미래역량캠프</div><div class="pdc-target">중등 · 고등</div></div>
+          <div class="pdc-body"><div class="pdc-desc">AI 리터러시, 데이터 사고력, 미래 기술 체험 등 디지털 전환 시대에 필요한 역량을 키우는 프로그램입니다. SW교육과 연계합니다.</div><div class="pdc-tags"><span class="pdc-tag">SW교육연계</span><span class="pdc-tag">디지털리터러시</span><span class="pdc-tag">미래역량</span></div></div>
+          <div class="pdc-footer"><span class="pdc-duration">⏱ 당일 / 1박 2일</span><button class="pdc-btn" onclick="go('contact')">문의하기</button></div>
+        </div>
+        <div class="prog-detail-card" data-target="중등,고등">
+          <div class="pdc-header" style="background:#5E8FBA"><div class="pdc-icon">📚</div><div class="pdc-title">자기주도학습캠프</div><div class="pdc-target">중등 · 고등</div></div>
+          <div class="pdc-body"><div class="pdc-desc">학습 전략 수립, 시간 관리, 메타인지 훈련 등 스스로 공부하는 힘을 기르는 집중 프로그램입니다.</div><div class="pdc-tags"><span class="pdc-tag">학습코칭</span><span class="pdc-tag">메타인지</span><span class="pdc-tag">시간관리</span></div></div>
+          <div class="pdc-footer"><span class="pdc-duration">⏱ 1박 2일 / 2박 3일</span><button class="pdc-btn" onclick="go('contact')">문의하기</button></div>
+        </div>
+        <div class="prog-detail-card" data-target="고등">
+          <div class="pdc-header" style="background:#7B8EC8"><div class="pdc-icon">🎓</div><div class="pdc-title">입시전략캠프</div><div class="pdc-target">고등 전용</div></div>
+          <div class="pdc-body"><div class="pdc-desc">고교학점제 과목 선택 전략, 탐구보고서 작성, 대입 로드맵 설계까지 고등학생 맞춤 입시 집중 캠프입니다.</div><div class="pdc-tags"><span class="pdc-tag">고교학점제</span><span class="pdc-tag">탐구보고서</span><span class="pdc-tag">대입전략</span></div></div>
+          <div class="pdc-footer"><span class="pdc-duration">⏱ 당일 / 1박 2일</span><button class="pdc-btn" onclick="go('contact')">문의하기</button></div>
+        </div>
+        <div class="prog-detail-card" data-target="초등,중등,고등">
+          <div class="pdc-header" style="background:#6AAE9A"><div class="pdc-icon">🌿</div><div class="pdc-title">환경캠프</div><div class="pdc-target">초등 · 중등 · 고등</div></div>
+          <div class="pdc-body"><div class="pdc-desc">기후변화 이해, 생태 감수성 함양, 환경 행동 실천 프로젝트로 구성된 환경교육 연계 캠프입니다.</div><div class="pdc-tags"><span class="pdc-tag">환경교육연계</span><span class="pdc-tag">생태체험</span><span class="pdc-tag">프로젝트학습</span></div></div>
+          <div class="pdc-footer"><span class="pdc-duration">⏱ 당일 / 1박 2일</span><button class="pdc-btn" onclick="go('contact')">문의하기</button></div>
+        </div>
+        <div class="prog-detail-card" data-target="초등,중등,고등">
+          <div class="pdc-header" style="background:#9080C0"><div class="pdc-icon">🤝</div><div class="pdc-title">인성캠프</div><div class="pdc-target">초등 · 중등 · 고등</div></div>
+          <div class="pdc-body"><div class="pdc-desc">공동체 의식, 배려와 존중, 올바른 가치관 형성을 목표로 하는 인성교육 프로그램입니다. 학교폭력예방교육과 연계 가능합니다.</div><div class="pdc-tags"><span class="pdc-tag">인성교육</span><span class="pdc-tag">학교폭력예방</span><span class="pdc-tag">공동체</span></div></div>
+          <div class="pdc-footer"><span class="pdc-duration">⏱ 당일 / 1박 2일</span><button class="pdc-btn" onclick="go('contact')">문의하기</button></div>
+        </div>
+        <div class="prog-detail-card" data-target="중등,고등">
+          <div class="pdc-header" style="background:#5A8EAA"><div class="pdc-icon">🏆</div><div class="pdc-title">팀빌딩캠프</div><div class="pdc-target">중등 · 고등</div></div>
+          <div class="pdc-body"><div class="pdc-desc">협업, 리더십, 갈등 해결 역량을 액션러닝 방식으로 키우는 팀빌딩 집중 프로그램입니다. 학급 단합 및 학생회 연수에 최적입니다.</div><div class="pdc-tags"><span class="pdc-tag">리더십</span><span class="pdc-tag">팀워크</span><span class="pdc-tag">학생회연수</span></div></div>
+          <div class="pdc-footer"><span class="pdc-duration">⏱ 1박 2일 추천</span><button class="pdc-btn" onclick="go('contact')">문의하기</button></div>
+        </div>
+      </div>
+      <div class="prog-custom-cta">
+        <div style="font-size:22px;margin-bottom:12px">📋</div>
+        <div style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px">원하시는 프로그램이 없으신가요?</div>
+        <div style="font-size:14px;color:var(--muted);margin-bottom:22px">학교의 교육 목표와 학생 특성에 맞춰 새롭게 설계해드립니다</div>
+        <button class="btn-navy" onclick="go('contact')">맞춤 프로그램 상담하기</button>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<!-- ===================================================
+     CASES PAGE
+==================================================== -->
+<div id="page-cases" class="page">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label">CASES</div>
+      <h1>운영 사례</h1>
+      <p>실제 학교 현장에서 운영한 캠프 사례를 소개합니다</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="cases-list">
+        <div class="case-full-card">
+          <div class="case-accent"></div>
+          <div class="case-content">
+            <div class="case-school-label">진로탐색캠프</div>
+            <div class="case-full-name">○○시 ○○중학교 2학년 진로탐색캠프</div>
+            <div class="case-meta-row">
+              <span class="case-meta-item">👥 00명</span>
+              <span class="case-meta-item">📅 1박 2일</span>
+              <span class="case-meta-item">📍 ○○지역</span>
+            </div>
+            <div class="case-quote">"학생들이 자신의 강점을 직접 발견하고 미래를 그려보는 뜻깊은 시간이었습니다. 담당 교사로서 운영 준비 부담이 거의 없어서 좋았습니다." — 담당 교사</div>
+          </div>
+        </div>
+        <div class="case-full-card">
+          <div class="case-accent"></div>
+          <div class="case-content">
+            <div class="case-school-label">자기주도학습캠프</div>
+            <div class="case-full-name">○○고등학교 1학년 학습전략 집중캠프</div>
+            <div class="case-meta-row">
+              <span class="case-meta-item">👥 00명</span>
+              <span class="case-meta-item">📅 2박 3일</span>
+              <span class="case-meta-item">📍 ○○지역</span>
+            </div>
+            <div class="case-quote">"캠프 이후 학생들의 자기 관리 능력이 눈에 띄게 달라졌다는 피드백을 받았습니다. 내년에도 꼭 다시 진행하고 싶습니다." — 담당 교사</div>
+          </div>
+        </div>
+        <div class="case-full-card">
+          <div class="case-accent"></div>
+          <div class="case-content">
+            <div class="case-school-label">팀빌딩캠프</div>
+            <div class="case-full-name">○○초등학교 6학년 리더십·팀빌딩캠프</div>
+            <div class="case-meta-row">
+              <span class="case-meta-item">👥 00명</span>
+              <span class="case-meta-item">📅 당일 과정</span>
+              <span class="case-meta-item">📍 교내 운영</span>
+            </div>
+            <div class="case-quote">"학급 분위기가 캠프 이후 확연히 달라졌습니다. 아이들이 서로를 더 잘 이해하게 된 것 같아 담임 교사로서 매우 만족스러웠습니다." — 담당 교사</div>
+          </div>
+        </div>
+        <div class="case-full-card">
+          <div class="case-accent"></div>
+          <div class="case-content">
+            <div class="case-school-label">환경캠프</div>
+            <div class="case-full-name">○○중학교 전학년 환경·생태 캠프</div>
+            <div class="case-meta-row">
+              <span class="case-meta-item">👥 00명</span>
+              <span class="case-meta-item">📅 1박 2일</span>
+              <span class="case-meta-item">📍 ○○지역</span>
+            </div>
+            <div class="case-quote">"환경 교육이 딱딱하지 않고 체험 중심으로 재미있게 운영되어 학생들의 참여도가 매우 높았습니다." — 담당 교사</div>
+          </div>
+        </div>
+        <div class="case-full-card">
+          <div class="case-accent"></div>
+          <div class="case-content">
+            <div class="case-school-label">입시전략캠프</div>
+            <div class="case-full-name">○○고등학교 2학년 대입 로드맵 캠프</div>
+            <div class="case-meta-row">
+              <span class="case-meta-item">👥 00명</span>
+              <span class="case-meta-item">📅 당일 과정</span>
+              <span class="case-meta-item">📍 교내 운영</span>
+            </div>
+            <div class="case-quote">"고교학점제와 수시 전형 이해를 한 번에 할 수 있어서 학생들에게 매우 유익했습니다. 전문성이 높다는 것을 느꼈습니다." — 담당 교사</div>
+          </div>
+        </div>
+        <div class="case-full-card">
+          <div class="case-accent"></div>
+          <div class="case-content">
+            <div class="case-school-label">인성캠프</div>
+            <div class="case-full-name">○○중학교 1학년 인성·공동체 캠프</div>
+            <div class="case-meta-row">
+              <span class="case-meta-item">👥 00명</span>
+              <span class="case-meta-item">📅 1박 2일</span>
+              <span class="case-meta-item">📍 ○○지역</span>
+            </div>
+            <div class="case-quote">"학교폭력 예방 교육과도 자연스럽게 연계되어 학교 차원에서 매우 만족스러운 결과를 얻었습니다." — 담당 교사</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:48px">
+        <p style="font-size:14px;color:var(--muted);margin-bottom:18px">더 많은 운영 사례와 상세 자료가 필요하시면 문의해 주세요</p>
+        <button class="btn-navy" onclick="go('contact')">운영 사례 상세 문의</button>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<!-- ===================================================
+     RESOURCES PAGE
+==================================================== -->
+<div id="page-resources" class="page">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label">RESOURCES</div>
+      <h1>자료실</h1>
+      <p>결재에 필요한 자료를 바로 다운받으세요</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="res-grid">
+        <div class="res-card">
+          <div class="res-type">PROPOSAL</div>
+          <div class="res-icon">📋</div>
+          <div class="res-title">통합 프로그램 제안서</div>
+          <div class="res-desc">꿈이룸연구소 전체 캠프 프로그램 개요 및 운영 방식을 담은 제안서입니다. 결재 및 내부 검토용으로 활용하실 수 있습니다.</div>
+          <div class="res-action">⬇ PDF 다운로드</div>
+        </div>
+        <div class="res-card">
+          <div class="res-type">CURRICULUM</div>
+          <div class="res-icon">📚</div>
+          <div class="res-title">프로그램별 커리큘럼</div>
+          <div class="res-desc">7개 캠프 프로그램별 세부 커리큘럼, 시간표, 학습 목표, 기대 효과가 담긴 상세 자료입니다.</div>
+          <div class="res-action">⬇ PDF 다운로드</div>
+        </div>
+        <div class="res-card">
+          <div class="res-type">SAFETY</div>
+          <div class="res-icon">🛡️</div>
+          <div class="res-title">안전관리 계획서</div>
+          <div class="res-desc">캠프 운영 시 적용되는 안전 관리 방침, 위기 대응 절차, 보험 가입 현황을 확인하실 수 있습니다.</div>
+          <div class="res-action">⬇ PDF 다운로드</div>
+        </div>
+        <div class="res-card">
+          <div class="res-type">INSTRUCTOR</div>
+          <div class="res-icon">👨‍🏫</div>
+          <div class="res-title">강사진 소개 자료</div>
+          <div class="res-desc">담당 강사의 학력, 경력, 자격증 이력을 정리한 자료입니다. 학교 결재 시 첨부 자료로 활용 가능합니다.</div>
+          <div class="res-action">⬇ PDF 다운로드</div>
+        </div>
+        <div class="res-card" onclick="go('contact')" style="cursor:pointer">
+          <div class="res-type">ESTIMATE</div>
+          <div class="res-icon">💰</div>
+          <div class="res-title">견적 요청</div>
+          <div class="res-desc">학교 규모, 대상 학년, 캠프 일수에 따라 맞춤 견적을 제공합니다. 양식을 작성해 주시면 1영업일 내 연락드립니다.</div>
+          <div class="res-action" style="color:var(--gold)">→ 견적 요청하기</div>
+        </div>
+        <div class="res-card">
+          <div class="res-type">REPORT SAMPLE</div>
+          <div class="res-icon">📊</div>
+          <div class="res-title">운영 결과 보고서 샘플</div>
+          <div class="res-desc">캠프 운영 후 학교에 제공되는 결과 보고서 샘플입니다. 학교 내부 보고 및 기록 자료로 활용하실 수 있습니다.</div>
+          <div class="res-action">⬇ PDF 다운로드</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<!-- ===================================================
+     CONTACT PAGE
+==================================================== -->
+<div id="page-contact" class="page">
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label">CONTACT</div>
+      <h1>문의 · 상담 신청</h1>
+      <p>학교 일정과 목표에 맞춰 맞춤 프로그램을 제안해드립니다</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="contact-page-grid">
+        <div class="contact-info-list">
+          <div class="info-card">
+            <div class="info-card-label">전화 문의</div>
+            <div class="info-card-value">010-5917-5951</div>
+            <div class="info-card-note">08:00 – 21:00</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-label">이메일</div>
+            <div class="info-card-value" style="font-size:15px">jtwoytwo@naver.com</div>
+          </div>
+          <a href="https://open.kakao.com/o/smVu2gri" target="_blank" rel="noopener" style="text-decoration:none">
+            <div class="info-card" style="cursor:pointer">
+              <div class="info-card-label">문의 오픈채팅</div>
+              <div class="info-card-value" style="font-size:14px">카카오 오픈채팅 바로가기 ↗</div>
+              <div class="info-card-note">클릭하여 채팅 바로 시작</div>
+            </div>
+          </a>
+          <div class="info-card" style="background:var(--navy);border-color:var(--navy)">
+            <div class="info-card-label" style="color:rgba(255,255,255,.55)">제안서가 필요하신가요?</div>
+            <div style="font-size:14px;color:rgba(255,255,255,.88);margin-top:4px;line-height:1.7">담당 교사 성함과 학교명만 남겨주시면 제안서를 바로 보내드립니다</div>
+            <button class="btn-primary" style="margin-top:16px;font-size:13px;padding:9px 18px;background:#fff;color:var(--navy)" onclick="go('resources')">📄 제안서 다운로드</button>
+          </div>
+        </div>
+        <div class="form-wrap">
+          <h3>맞춤 상담 신청</h3>
+          <form action="https://formsubmit.co/jtwoytwo@naver.com" method="POST">
+            <!-- FormSubmit 설정 -->
+            <input type="hidden" name="_subject"  value="[꿈이룸연구소] 맞춤 상담 신청">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha"  value="false">
+            <input type="hidden" name="_autoresponse" value="꿈이룸연구소에 상담을 신청해 주셔서 감사합니다. 담당자가 확인 후 빠르게 연락드리겠습니다.">
+ 
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">성함 *</label>
+                <input name="성함" class="form-input" type="text" placeholder="홍길동" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">학교명 *</label>
+                <input name="학교명" class="form-input" type="text" placeholder="○○중학교" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">연락처 *</label>
+                <input name="연락처" class="form-input" type="tel" placeholder="010-0000-0000" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">이메일</label>
+                <input name="이메일" class="form-input" type="email" placeholder="teacher@school.kr">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">관심 프로그램</label>
+                <select name="관심 프로그램" class="form-select">
+                  <option value="">선택하세요</option>
+                  <option>진로탐색캠프</option>
+                  <option>AI·미래역량캠프</option>
+                  <option>자기주도학습캠프</option>
+                  <option>입시전략캠프</option>
+                  <option>환경캠프</option>
+                  <option>인성캠프</option>
+                  <option>팀빌딩캠프</option>
+                  <option>맞춤 프로그램 설계</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">대상 학년</label>
+                <select name="대상 학년" class="form-select">
+                  <option value="">선택하세요</option>
+                  <option>초1</option>
+                  <option>초2</option>
+                  <option>초3</option>
+                  <option>초4</option>
+                  <option>초5</option>
+                  <option>초6</option>
+                  <option>중1</option>
+                  <option>중2</option>
+                  <option>중3</option>
+                  <option>고등 1학년</option>
+                  <option>고등 2학년</option>
+                  <option>고등 3학년</option>
+                  <option>학년 혼합</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">문의 내용</label>
+              <textarea name="문의 내용" class="form-textarea" placeholder="희망 일정, 참가 인원, 운영 목적 등을 자유롭게 작성해 주세요"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">상담 신청하기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+ 
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">꿈이룸<span>연구소</span></div>
+        <div class="footer-info">
+          상호명: 꿈이룸연구소 · 대표: ○○○<br>
+          사업자등록번호: 000-00-00000<br>
+          주소: ○○시 ○○구 ○○로 000<br>
+          전화: 010-5917-5951 · 이메일: jtwoytwo@naver.com
+        </div>
+      </div>
+      <div class="footer-links">
+        <span class="footer-link" onclick="go('about')">연구소 소개</span>
+        <span class="footer-link" onclick="go('programs')">캠프 프로그램</span>
+        <span class="footer-link" onclick="go('cases')">운영 사례</span>
+        <span class="footer-link" onclick="go('resources')">자료실</span>
+        <span class="footer-link" onclick="go('contact')">문의하기</span>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 꿈이룸연구소. All rights reserved. &nbsp;·&nbsp; 개인정보처리방침</div>
+  </div>
+</footer>
+ 
+<script>
+const NAV_MAP = {home:0,about:1,programs:2,cases:3,resources:4,contact:5};
+ 
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const links = document.querySelectorAll('.nav-link');
+  if (NAV_MAP[id] !== undefined) links[NAV_MAP[id]].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+ 
+function filterProg(btn, target) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prog-detail-card').forEach(card => {
+    if (target === 'all') { card.style.display = ''; return; }
+    card.style.display = (card.dataset.target || '').includes(target) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
